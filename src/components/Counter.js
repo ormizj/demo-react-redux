@@ -12,11 +12,11 @@ const Counter = () => {
   const counter = useSelector(state => state.counter);
 
   const incrementHandler = () => {
-    return dispatch({ type: 'INCREMENT' });
+    dispatch({ type: 'INCREMENT' });
   }
 
   const decrementHandler = () => {
-    return dispatch({ type: 'DECREMENT' });
+    dispatch({ type: 'DECREMENT' });
   }
 
   const toggleCounterHandler = () => { };
@@ -35,3 +35,53 @@ const Counter = () => {
 };
 
 export default Counter;
+
+
+
+/** class example
+
+import { Component } from 'react';
+import { connect } from 'react-redux';
+
+class Counter extends Component {
+  incrementHandler() {
+    this.props.increment();
+  }
+
+  decrementHandler() {
+    this.props.decrement();
+  }
+
+  toggleCounterHandler() { };
+
+
+  render() {
+    return (
+      <main className={classes.counter}>
+        <h1>Redux Counter</h1>
+        <div className={classes.value}>{this.props.counter}</div>
+        <div>
+          <button onClick={this.incrementHandler.bind(this)}>Increment</button>
+          <button onClick={this.decrementHandler.bind(this)}>Decrement</button>
+        </div>
+        <button onClick={this.toggleCounterHandler}>Toggle Counter</button>
+      </main>
+    );
+  }
+}
+
+// the keys will be available as props for the class component (for mapStateToProps & mapDispatchToProps)
+const mapStateToProps = state => ({
+  counter: state.counter,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  increment: () => dispatch({ type: 'INCREMENT' }),
+  decrement: () => dispatch({ type: 'DECREMENT' }),
+})
+
+// since you can't use hooks in React components, this is how you would use redux with classes
+// (connect can also be used by functional components, but hooks are best practice)
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+
+*/
